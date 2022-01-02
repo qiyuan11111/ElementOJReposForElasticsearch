@@ -8,5 +8,6 @@ RUN sed -i 's#http://archive.ubuntu.com/#http://mirrors.tuna.tsinghua.edu.cn/#' 
 COPY config/jvm.options /usr/local/src/elasticsearch-5.0.1/config/jvm.options
 COPY config/limits.conf /etc/security/limits.conf
 COPY config/sysctl.conf /etc/sysctl.conf
-RUN sudo sysctl -p && chown -R elasticsearch /usr/local/src/elasticsearch-5.0.1 && su elasticsearch
+COPY config/elasticsearch.yml /usr/local/src/elasticsearch-5.0.1/config/elasticsearch.yml
+RUN sudo sysctl -p && chown -R elasticsearch /usr/local/src/elasticsearch-5.0.1
 EXPOSE 9200
