@@ -9,5 +9,8 @@ COPY config/jvm.options /usr/local/src/elasticsearch-5.0.1/config/jvm.options
 COPY config/limits.conf /etc/security/limits.conf
 COPY config/sysctl.conf /etc/sysctl.conf
 COPY config/elasticsearch.yml /usr/local/src/elasticsearch-5.0.1/config/elasticsearch.yml
-RUN sudo sysctl -p && chown -R elasticsearch /usr/local/src/elasticsearch-5.0.1
+COPY start.sh /usr/local/src/elasticsearch-5.0.1/start.sh
+RUN sudo sysctl -p && chown -R elasticsearch /usr/local/src/elasticsearch-5.0.1 && chmod 777 /usr/local/src/elasticsearch-5.0.1/start.sh
 EXPOSE 9200
+EXPOSE 9300
+ENTRYPOINT ["/bin/sh", "/usr/local/src/elasticsearch-5.0.1/start.sh"] 
