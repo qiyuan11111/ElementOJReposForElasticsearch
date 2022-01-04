@@ -5,10 +5,6 @@ RUN sed -i 's#http://archive.ubuntu.com/#http://mirrors.tuna.tsinghua.edu.cn/#' 
 	&& pip3 install --upgrade pip -i https://pypi.tuna.tsinghua.edu.cn/simple/ && pip install mongo-connector \
 	&& pip3 install mongo-connector[elastic5] && cd /usr/local/src && wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.0.1.zip \
 	&& unzip elasticsearch-5.0.1.zip && useradd elasticsearch
-COPY config/jvm.options /usr/local/src/elasticsearch-5.0.1/config/jvm.options
-COPY config/limits.conf /etc/security/limits.conf
-COPY config/sysctl.conf /etc/sysctl.conf
-COPY config/elasticsearch.yml /usr/local/src/elasticsearch-5.0.1/config/elasticsearch.yml
 COPY start.sh /usr/local/src/elasticsearch-5.0.1/start.sh
 RUN sudo sysctl -p && chown -R elasticsearch /usr/local/src/elasticsearch-5.0.1 && chmod 777 /usr/local/src/elasticsearch-5.0.1/start.sh
 EXPOSE 9200
